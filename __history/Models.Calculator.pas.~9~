@@ -15,7 +15,7 @@ type
     procedure EnterValue(AValue: Double);
     procedure SetOperator(AOperator: Char);
     function GetResult: Double;
-    procedure Clear;      // test commit
+    procedure Clear;
   end;
 
 implementation
