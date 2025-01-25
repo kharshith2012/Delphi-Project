@@ -1,0 +1,40 @@
+unit View.User;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Data.DB, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TfrmUser = class(TForm)
+    Label1: TLabel;
+    edtUserName: TEdit;
+    btnSave: TButton;
+    btnCancel: TBitBtn;
+    pnlUser: TPanel;
+    Panel1: TPanel;
+    DBGrid1: TDBGrid;
+    btnLoadUser: TButton;
+    procedure btnSaveClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmUser: TfrmUser;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmUser.btnSaveClick(Sender: TObject);
+begin
+FUserController.User.Name := edtUserName.Text;
+  FUserController.SaveUser;
+end;
+
+end.

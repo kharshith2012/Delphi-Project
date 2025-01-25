@@ -1,0 +1,32 @@
+unit Models.UserDTO;
+
+interface
+
+uses
+  System.SysUtils, Models.TDatabaseConnection;
+
+type
+  TUserDTO = class
+  private
+    FID: Integer;
+    FName: string;
+//    FDatabase: TDatabaseConnection;
+  public
+    constructor Create(AID: Integer; AName: string; ADatabase: TDatabaseConnection);
+
+    property ID: Integer read FID write FID;
+    property Name: string read FName write FName;
+//    property Database: TDatabaseConnection read FDatabase write FDatabase;
+  end;
+
+implementation
+
+constructor TUserDTO.Create(AID: Integer; AName: string; ADatabase: TDatabaseConnection);
+begin
+  FID := AID;
+  FName := AName;
+//  FDatabase := ADatabase;
+end;
+
+end.
+

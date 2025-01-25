@@ -1,0 +1,52 @@
+unit Controllers.CalculatorController;
+
+interface
+
+uses
+  Interfaces.ICalculator, Models.Calculator, System.SysUtils;
+
+type
+  TCalculatorController = class
+  private
+    FCalculator: ICalculator;
+    FExpression: string;
+  public
+    constructor Create;
+    procedure AppendInput(Input: string);
+    function EvaluateExpression: string;
+    procedure ClearExpression;
+    property Expression: string read FExpression;
+  end;
+
+implementation
+
+{ TCalculatorController }
+
+constructor TCalculatorController.Create;
+begin
+  FCalculator := TCalculator.Create;
+  FExpression := '';
+end;
+
+procedure TCalculatorController.AppendInput(Input: string);
+begin
+  FExpression := FExpression + Input;
+end;
+
+function TCalculatorController.EvaluateExpression: string;
+begin
+  try
+    Result := FormatFloat('0.########', FCalculator.Calculate(FExpression));
+    FExpression := Result; // Continue with the result for next calculation
+  except
+    Result := 'Error';
+  end;
+end;
+
+procedure TCalculatorController.ClearExpression;
+begin
+  FExpression := '';
+end;
+
+end.
+

@@ -1,0 +1,94 @@
+unit Models.Calculator;
+
+interface
+
+uses
+  System.SysUtils, System.Math;
+
+type
+  TCalculator = class
+  private
+    FCurrentValue: Double;    // Stores the current value in the calculator
+    FPendingValue: Double;    // Stores the previous value before an operation
+    FOperator: Char;          // Stores the current operation ('+', '-', '*', '/')
+    FIsNewOperation: Boolean; // Tracks if a new operation is starting
+    procedure ApplyPendingOperation;
+  public
+    constructor Create;
+    procedure EnterValue(AValue: Double);
+    procedure SetOperator(AOperator: Char);
+    function GetResult: Double;
+    procedure Clear;
+  end;
+
+implementation
+
+{ TCalculator }
+
+constructor TCalculator.Create;
+begin
+  FCurrentValue := 0;
+  FPendingValue := 0;
+  FOperator := #0;
+  FIsNewOperation := True;
+end;
+
+procedure TCalculator.ApplyPendingOperation;
+begin
+  case FOperator of
+    '+': FPendingValue := FPendingValue + FCurrentValue;
+    '-': FPendingValue := FPendingValue - FCurrentValue;
+    '*': FPendingValue := FPendingValue * FCurrentValue;
+    '/':
+      if FCurrentValue = 0 then
+        raise Exception.Create('Division by zero')
+      else
+        FPendingValue := FPendingValue / FCurrentValue;
+  else
+    FPendingValue := FCurrentValue; // If no operator, set pending value to current
+  end;
+end;
+
+procedure TCalculator.EnterValue(AValue: Double);
+begin
+  if FIsNewOperation then
+  begin
+    FCurrentValue := AValue;
+    FIsNewOperation := False;
+  end
+  else
+    FCurrentValue := FCurrentValue * 10 + AValue; // Allow appending digits
+end;
+
+procedure TCalculator.SetOperator(AOperator: Char);
+begin
+  if not FIsNewOperation then
+  begin
+    ApplyPendingOperation;
+    FOperator := AOperator;
+    FIsNewOperation := True;
+  end
+  else
+    FOperator := AOperator; // Set operator if it was reset
+end;
+
+function TCalculator.GetResult: Double;
+begin
+  ApplyPendingOperation;
+  FCurrentValue := FPendingValue;
+  FPendingValue := 0;
+  FOperator := #0;
+  FIsNewOperation := True;
+  Result := FCurrentValue;
+end;
+
+procedure TCalculator.Clear;
+begin
+  FCurrentValue := 0;
+  FPendingValue := 0;
+  FOperator := #0;
+  FIsNewOperation := True;
+end;
+
+end.
+

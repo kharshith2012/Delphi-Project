@@ -1,0 +1,14 @@
+unit Interfaces.Icalculator;
+
+interface
+   type
+    ICalculator = interface
+    ['{A1234567-B123-C123-D123-E123456789AB}']  // Unique GUID
+    function Add(A, B: Double): Double;
+    function Subtract(A, B: Double): Double;
+    function Multiply(A, B: Double): Double;
+    function Divide(A, B: Double): Double;
+  end;
+implementation
+
+end.

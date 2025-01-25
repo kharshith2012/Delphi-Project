@@ -1,0 +1,20 @@
+program FirstDemo;
+
+uses
+  Vcl.Forms,
+  frmLogin_u in 'frmLogin_u.pas' {frmLogin},
+  frmDashboard_u in 'frmDashboard_u.pas' {frmDashboard},
+  frmContact_u in 'frmContact_u.pas' {frmContact},
+  Models.User in 'Models.User.pas',
+  Models.TDatabaseConnection in 'Models.TDatabaseConnection.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmDashboard, frmDashboard);
+  Application.CreateForm(TfrmContact, frmContact);
+  Application.Run;
+end.

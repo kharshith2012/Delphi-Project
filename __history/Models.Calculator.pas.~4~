@@ -1,0 +1,91 @@
+unit Models.Calculator;
+
+interface
+
+uses
+  System.SysUtils, Interfaces.ICalculator;
+
+type
+  TCalculator = class(TInterfacedObject, ICalculator)
+  private
+    FCurrentValue: Double;
+    FPendingValue: Double;
+    FOperator: Char;
+    FIsNewOperation: Boolean;
+    procedure ApplyPendingOperation;
+  public
+    constructor Create;
+    procedure EnterValue(AValue: Double);
+    procedure SetOperator(AOperator: Char);
+    function GetResult: Double;
+    procedure Clear;
+  end;
+
+implementation
+
+{ TCalculator }
+
+constructor TCalculator.Create;
+begin
+  FCurrentValue := 0;
+  FPendingValue := 0;
+  FOperator := #0;
+  FIsNewOperation := True;
+end;
+
+procedure TCalculator.ApplyPendingOperation;
+begin
+  case FOperator of
+    '+': FPendingValue := FPendingValue + FCurrentValue;
+    '-': FPendingValue := FPendingValue - FCurrentValue;
+    '*': FPendingValue := FPendingValue * FCurrentValue;
+    '/':
+      if FCurrentValue = 0 then
+        raise Exception.Create('Division by zero')
+      else
+        FPendingValue := FPendingValue / FCurrentValue;
+  else
+    FPendingValue := FCurrentValue;
+  end;
+end;
+
+procedure TCalculator.EnterValue(AValue: Double);
+begin
+  if FIsNewOperation then
+  begin
+    FCurrentValue := AValue;
+    FIsNewOperation := False;
+  end
+  else
+    FCurrentValue := FCurrentValue * 10 + AValue; // Allow appending digits
+end;
+
+procedure TCalculator.SetOperator(AOperator: Char);
+begin
+  if not FIsNewOperation then
+    ApplyPendingOperation;
+
+  FOperator := AOperator;
+  FIsNewOperation := True;
+end;
+
+function TCalculator.GetResult: Double;
+begin
+  ApplyPendingOperation;
+  FCurrentValue := FPendingValue;
+  FPendingValue := 0;
+  FOperator := #0;
+  FIsNewOperation := True;
+  Result := FCurrentValue;
+end;
+
+procedure TCalculator.Clear;
+begin
+  FCurrentValue := 0;
+  FPendingValue := 0;
+  FOperator := #0;
+  FIsNewOperation := True;
+end;
+
+end.
+

@@ -1,0 +1,35 @@
+unit Models.Calculator;
+
+interface
+
+uses
+  Interfaces.ICalculator, System.SysUtils, System.Math;
+
+type
+  TCalculator = class(TInterfacedObject, ICalculator)
+  public
+    function Calculate(Expression: string): Double;
+  end;
+
+implementation
+
+{ TCalculator }
+
+function TCalculator.Calculate(Expression: string): Double;
+var
+  Script: TFPExpressionParser;
+  ResultValue: Double;
+begin
+  try
+    Script := TFPExpressionParser.Create(nil);
+    Script.BuiltIns := [bcMath];
+    Script.Expression := Expression;
+    ResultValue := Script.Evaluate.ResFloat;
+    Result := ResultValue;
+  finally
+    Script.Free;
+  end;
+end;
+
+end.
+

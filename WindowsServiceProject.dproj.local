@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2024-12-20 23:12:18.255,=C:\Users\khars\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024-12-20 23:12:55.079,C:\Users\khars\Documents\Embarcadero\Studio\Projects\FirstWindowsService.pas=C:\Users\khars\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024-12-20 23:12:55.079,C:\Users\khars\Documents\Embarcadero\Studio\Projects\FirstWindowsService.dfm=C:\Users\khars\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024-12-20 23:13:14.611,C:\Harshith\Project\delphi project\FirstWindowsService.dfm=C:\Users\khars\Documents\Embarcadero\Studio\Projects\FirstWindowsService.dfm</Transaction>
+    <Transaction>2024-12-20 23:13:14.611,C:\Harshith\Project\delphi project\FirstWindowsService.pas=C:\Users\khars\Documents\Embarcadero\Studio\Projects\FirstWindowsService.pas</Transaction>
+    <Transaction>2024-12-20 23:13:27.650,C:\Harshith\Project\delphi project\WindowsServiceProject.dproj=C:\Users\khars\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

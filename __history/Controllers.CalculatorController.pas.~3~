@@ -1,0 +1,41 @@
+unit Controllers.CalculatorController;
+
+interface
+
+uses
+  Interfaces.ICalculator,Models.Calculator, System.SysUtils;
+
+type
+  TCalculatorController = class
+  private
+    FCalculator: ICalculator;
+  public
+    constructor Create;
+    function PerformOperation(Operation: string; A, B: Double): Double;
+  end;
+
+implementation
+
+{ TCalculatorController }
+
+constructor TCalculatorController.Create;
+begin
+  FCalculator := TCalculator.Create;  // Initialize the calculator logic
+end;
+
+function TCalculatorController.PerformOperation(Operation: string; A, B: Double): Double;
+begin
+  if Operation = 'Add' then
+    Result := FCalculator.Add(A, B)
+  else if Operation = 'Subtract' then
+    Result := FCalculator.Subtract(A, B)
+  else if Operation = 'Multiply' then
+    Result := FCalculator.Multiply(A, B)
+  else if Operation = 'Divide' then
+    Result := FCalculator.Divide(A, B)
+  else
+    raise Exception.Create('Invalid operation.');
+end;
+
+end.
+

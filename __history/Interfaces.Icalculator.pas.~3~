@@ -1,0 +1,14 @@
+unit Interfaces.ICalculator;
+
+interface
+
+type
+  ICalculator = interface
+    ['{A1234567-B123-C123-D123-E123456789AB}']
+    function Calculate(Expression: string): Double;
+  end;
+
+implementation
+
+end.
+

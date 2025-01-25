@@ -1,0 +1,41 @@
+unit frmCalculator_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TfrmCalculator = class(TForm)
+    Display: TEdit;
+    btn9: TButton;
+    BtnEquals: TButton;
+    btn0: TButton;
+    btn1: TButton;
+    btn2: TButton;
+    btn3: TButton;
+    btn4: TButton;
+    btn5: TButton;
+    btn6: TButton;
+    btn7: TButton;
+    btn8: TButton;
+    Button10: TButton;
+    Add: TButton;
+    Subtract: TButton;
+    Multiply: TButton;
+    BtnDivide: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCalculator: TfrmCalculator;
+
+implementation
+
+{$R *.dfm}
+
+end.

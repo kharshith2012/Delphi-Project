@@ -1,0 +1,48 @@
+unit Models.TDatabaseConnection;
+
+interface
+
+uses
+  System.SysUtils, Data.Win.ADODB, Data.DB;
+
+type
+  TDatabaseConnection = class
+  private
+    FADOConnection: TADOConnection;
+    function GetConnection: TADOConnection;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure Connect;
+    property Connection: TADOConnection read GetConnection;
+  end;
+
+implementation
+
+{ TDatabaseConnection }
+
+constructor TDatabaseConnection.Create;
+begin
+  FADOConnection := TADOConnection.Create(nil);
+  FADOConnection.ConnectionString := 'Provider=SQLOLEDB;Data Source=ServerName;Initial Catalog=DatabaseName;User ID=Username;Password=Password;';;
+end;
+
+destructor TDatabaseConnection.Destroy;
+begin
+  FADOConnection.Free;
+  inherited;
+end;
+
+procedure TDatabaseConnection.Connect;
+begin
+  if not FADOConnection.Connected then
+    FADOConnection.Open;
+end;
+
+function TDatabaseConnection.GetConnection: TADOConnection;
+begin
+  Result := FADOConnection;
+end;
+
+end.
+
